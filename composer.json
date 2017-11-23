@@ -2,6 +2,7 @@
   "name": "trive/fiskalapi",
   "type": "library",
   "description": "Fiskal API PHP Connector",
+  "version": "1.0.2",
   "license": "proprietary",
   "require": {
     "php": "^5.6 || ^7.0"

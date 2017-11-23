@@ -28,7 +28,7 @@ class Client
     /**
      * Live FINA URL.
      */
-    const LIVE_URL = 'https://cis.porezna-uprava.hr:8449/FiskalizacijaAPIService';
+    const LIVE_URL = 'https://cis.porezna-uprava.hr:8449/FiskalizacijaService';
 
     /**
      * Certificate directory path.
