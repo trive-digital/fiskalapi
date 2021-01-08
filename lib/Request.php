@@ -97,7 +97,7 @@ class Request
         $writer->writeAttribute('Id', uniqid());
         $writer->startElementNs($namespace, 'Zaglavlje', null);
         $writer->writeElementNs($namespace, 'IdPoruke', null, $this->generateUUID());
-        $writer->writeElementNs($namespace, 'DatumVrijeme', null, $this->generateDateTime());
+        $writer->writeElementNs($namespace, 'DatumVrijeme', null, $this->getRequest()->getDateTime());
         $writer->endElement();
         $writer->writeRaw($this->getRequest()->toXML());
         $writer->endElement();
