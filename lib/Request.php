@@ -70,18 +70,6 @@ class Request
     }
 
     /**
-     * Generate date and time, and format according to spec
-     *
-     * @return string
-     */
-    private function generateDateTime()
-    {
-        $date = new \DateTime();
-
-        return $date->format('d.m.Y\TH:i:s');
-    }
-
-    /**
      * Set headers, get specific request XML body and make request
      *
      * @return string
