@@ -479,9 +479,31 @@ class Client
      */
     private function getCertificateIssuerSerialNumber()
     {
-        $publicCertData = $this->getPublicCertificateData();
+        // 1.) We need to use serialNumberHex since serialNumber is not to be trusted
+        // Pls. see last comment on https://bugs.php.net/bug.php?id=77411&edit=1
 
-        return $publicCertData['serialNumber'];
+        // 2.) Some (new?) FISKAL_2 certificates have serial number which exceeds int32 limit
+
+        $publicCertData = $this->getPublicCertificateData();
+        return $this->bchexdec($publicCertData['serialNumberHex']);
+    }
+
+    /**
+     * Convert "big" hex to string representing integers which exceeds int32 limit
+     * see getCertificateIssuerSerialNumber()
+     * https://stackoverflow.com/questions/1273484/large-hex-values-with-php-hexdec
+     *
+     * @param string $hex
+     * @return string
+     */
+    public function bchexdec($hex)
+    {
+        $dec = 0;
+        $len = strlen($hex);
+        for ($i = 1; $i <= $len; $i++) {
+            $dec = bcadd($dec, bcmul(strval(hexdec($hex[$i - 1])), bcpow('16', strval($len - $i))));
+        }
+        return $dec;
     }
 
     /**
